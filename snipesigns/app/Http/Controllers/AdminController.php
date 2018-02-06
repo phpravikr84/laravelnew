@@ -1,27 +1,29 @@
 <?php
+
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use \Illuminate\Http\Request;
 
-class AdminController extends Controller{
+class AdminController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
 
-        public function checkLogin(Request $request){
-
-                if(isset($request['username']) && isset($request['password'])){
-
-                    if(strlen($request['username'])>0 && strlen($request['password'])){
-
-                        return view('admin.dashboard');
-
-                    } else{
-                        return redirect()->back();
-                    }
-                } else{
-
-                    return redirect()->back();
-                }
-
-        }
-
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+         return view('admin.home');
+    }
 }
-

@@ -1,5 +1,4 @@
  <!-- Left Panel -->
-
  <aside id="left-panel" class="left-panel">
  <nav class="navbar navbar-expand-sm navbar-default">
 
@@ -10,3 +9,5 @@
          <a class="navbar-brand" href="./"><img src="{{ URL::to('public/admin/images/logo.png') }}" alt="Logo"></a>
          <a class="navbar-brand hidden" href="./"><img src="{{ URL::to('public/admin/images/logo2.png') }}" alt="Logo"></a>
      </div>
+
+     

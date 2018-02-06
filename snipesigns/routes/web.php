@@ -15,26 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function(){
+Auth::routes();
 
-    
-    Route::get('/', function() {
-        return view('admin.login');
-    })->name('login');
+Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/login', function() {
-        return view('admin.login');
-    })->name('login');
 
-    Route::post('/', [
-        'uses' => 'AdminController@checkLogin',
-        'as' => 'checklogin'
-    ]);
-    
-    
-    Route::get('/dashboard', function() {
-        return view('admin.dashboard');
-    })->name('dashboard');
-
-});
-
+Route::GET('admin/home', 'AdminController@index');
+Route::GET('admin', 'Admin\LoginController@showLoginForm')->name('admin.login');
+Route::POST('admin', 'Admin\LoginController@login');
+//Route::POST('admin/logout', 'Admin\LoginController@logout');
+Route::POST('admin-password/email', 'Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+Route::GET('admin-password/reset', 'Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+Route::POST('admin-password/reset', 'Admin\ResetPasswordController@reset');
+Route::GET('admin-password/reset/{token}', 'Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
+Route::GET('admin/register', 'Admin\RegisterController@showRegistrationForm')->name('admin.register');
+Route::POST('admin/register', 'Admin\RegisterController@register');
